@@ -1,0 +1,66 @@
+{
+	"name": "dataflow1",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "titanic",
+						"type": "DatasetReference"
+					},
+					"name": "titanic"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "DelimitedText1",
+						"type": "DatasetReference"
+					},
+					"name": "resultadotitanic"
+				}
+			],
+			"transformations": [
+				{
+					"name": "filtrado"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          Name as string,",
+				"          PClass as string,",
+				"          Age as string,",
+				"          Sex as string,",
+				"          Survived as string,",
+				"          SexCode as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: true,",
+				"     ignoreNoFilesFound: false) ~> titanic",
+				"titanic select(mapColumn(",
+				"          Name,",
+				"          PrimeraClasse = PClass,",
+				"          Age,",
+				"          Sex,",
+				"          Survived,",
+				"          SexCode",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> filtrado",
+				"filtrado sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          Column_1 as string,",
+				"          Column_2 as string,",
+				"          Column_3 as string,",
+				"          Column_4 as string,",
+				"          Column_5 as string,",
+				"          Column_6 as string",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> resultadotitanic"
+			]
+		}
+	}
+}
