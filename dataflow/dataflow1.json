@@ -24,6 +24,9 @@
 			"transformations": [
 				{
 					"name": "filtrado"
+				},
+				{
+					"name": "columnaderivada"
 				}
 			],
 			"scriptLines": [
@@ -38,7 +41,7 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: true,",
 				"     ignoreNoFilesFound: false) ~> titanic",
-				"titanic select(mapColumn(",
+				"columnaderivada select(mapColumn(",
 				"          Name,",
 				"          PrimeraClasse = PClass,",
 				"          Age,",
@@ -48,6 +51,7 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> filtrado",
+				"titanic derive(Age = Age + \"2\") ~> columnaderivada",
 				"filtrado sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
