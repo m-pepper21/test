@@ -1,0 +1,9 @@
+{
+	"name": "datawarehousedatafactorymp",
+	"location": "westeurope",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "e81cb349-2c3e-4013-8ff6-6cd61fba1adc",
+		"tenantId": "eadb7e3d-de0d-437d-92af-20bc0ee9dc90"
+	}
+}
